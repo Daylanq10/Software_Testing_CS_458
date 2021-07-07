@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<pnml>
+<net id="Net-One" type="PrT net">
+<tokenclass id="Default" enabled="true" red="0" green="0" blue="0"/>
+<labels x="931" y="330" width="137" height="181" border="true">
+<text>general rules/notes
+r!=JUNIORBUYER, r!=SENIORBUYER,r!=SELLER
+r!=ADMIN, r!=MODERATOR, r!=PERSONNEL
+r!=ADMIN, r!=MODERATOR, r!=PERSONNEL, r!=SELLER</text>
+</labels>
+<labels x="930" y="133" width="109" height="24" border="true">
+<text>GLOBAL role(r)</text>
+</labels>
+<labels x="929" y="178" width="138" height="118" border="true">
+<text>INIT start(), role(SELLER), role(SENIORBUYER), role(JUNIORBUYER), role(ADMIN), role(MODERATOR), role(PERSONNEL)</text>
+</labels>
+<place id="P1">
+<graphics>
+<position x="495.0" y="360.0"/>
+</graphics>
+<name>
+<value>start</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<transition id="T1">
+<graphics>
+<position x="660.0" y="75.0"/>
+</graphics>
+<name>
+<value>updateMyInformation</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value/>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T10">
+<graphics>
+<position x="555.0" y="585.0"/>
+</graphics>
+<name>
+<value>updatePersonnelAccount</value>
+<graphics>
+<offset x="112.0" y="34.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=JUNIORBUYER, r!=SENIORBUYER,r!=SELLER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T11">
+<graphics>
+<position x="705.0" y="615.0"/>
+</graphics>
+<name>
+<value>pUpdatePersonnelAccount</value>
+<graphics>
+<offset x="93.0" y="25.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=ADMIN, r!=MODERATOR, r!=PERSONNEL</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T12">
+<graphics>
+<position x="495.0" y="30.0"/>
+</graphics>
+<name>
+<value>updateUserAccount</value>
+<graphics>
+<offset x="126.0" y="32.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=ADMIN, r!=MODERATOR, r!=PERSONNEL</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T13">
+<graphics>
+<position x="795.0" y="360.0"/>
+</graphics>
+<name>
+<value>evaluateSeller</value>
+<graphics>
+<offset x="126.0" y="-35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=ADMIN, r!=MODERATOR, r!=PERSONNEL, r!=SELLER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T14">
+<graphics>
+<position x="720.0" y="195.0"/>
+</graphics>
+<name>
+<value>evaluateBuyer</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r=SELLER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T15">
+<graphics>
+<position x="825.0" y="420.0"/>
+</graphics>
+<name>
+<value>uEvaluateSeller</value>
+<graphics>
+<offset x="49.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=SELLER, r!=SENIORBUYER, r!=JUNIORBUYER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T16">
+<graphics>
+<position x="270.0" y="510.0"/>
+</graphics>
+<name>
+<value>uDeletePersonnelAccount</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r=PERSONNEL</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T2">
+<graphics>
+<position x="435.0" y="120.0"/>
+</graphics>
+<name>
+<value>pUpdateUserAccount</value>
+<graphics>
+<offset x="15.0" y="31.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r=NONE</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T3">
+<graphics>
+<position x="390.0" y="180.0"/>
+</graphics>
+<name>
+<value>deleteUserAccount</value>
+<graphics>
+<offset x="5.0" y="11.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=JUNIORBUYER, r!=SENIORBUYER,r!=SELLER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T4">
+<graphics>
+<position x="330.0" y="240.0"/>
+</graphics>
+<name>
+<value>pDeleteUserAccount</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=ADMIN, r!=MODERATOR, r!=PERSONNEL</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T5">
+<graphics>
+<position x="285.0" y="315.0"/>
+</graphics>
+<name>
+<value>consultUserAccount</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value/>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T6">
+<graphics>
+<position x="270.0" y="390.0"/>
+</graphics>
+<name>
+<value>pConsultPersonnelAccount</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=ADMIN, r!=MODERATOR, r!=PERSONNEL</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T7">
+<graphics>
+<position x="270.0" y="465.0"/>
+</graphics>
+<name>
+<value>consultPersonnelAccount</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=JUNIORBUYER, r!=SENIORBUYER,r!=SELLER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T8">
+<graphics>
+<position x="330.0" y="540.0"/>
+</graphics>
+<name>
+<value>pDeletePersonnelAccount</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=ADMIN, r!=PERSONNEL</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T9">
+<graphics>
+<position x="405.0" y="570.0"/>
+</graphics>
+<name>
+<value>deletePersonnelAccount</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r=ADMIN</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<arc id="P1 to T1" source="P1" target="T1">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="514" y="358" curvePoint="false"/>
+<arcpath id="001" x="666" y="87" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T12" source="P1" target="T12">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="507" y="357" curvePoint="false"/>
+<arcpath id="001" x="507" y="57" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T13" source="P1" target="T13">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="521" y="372" curvePoint="false"/>
+<arcpath id="001" x="801" y="372" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T14" source="P1" target="T14">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="519" y="363" curvePoint="false"/>
+<arcpath id="001" x="726" y="207" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T15" source="P1" target="T15">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="521" y="374" curvePoint="false"/>
+<arcpath id="001" x="831" y="432" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P1 to T2" source="P1" target="T2">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="503" y="357" curvePoint="false"/>
+<arcpath id="001" x="447" y="147" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T3" source="P1" target="T3">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="499" y="358" curvePoint="false"/>
+<arcpath id="001" x="406" y="192" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P1 to T4" source="P1" target="T4">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="494" y="363" curvePoint="false"/>
+<arcpath id="001" x="346" y="252" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T5" source="P1" target="T5">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="492" y="368" curvePoint="false"/>
+<arcpath id="001" x="301" y="327" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T7" source="P1" target="T7">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="493" y="378" curvePoint="false"/>
+<arcpath id="001" x="286" y="477" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T10 to P1" source="T10" target="P1">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="567" y="582" curvePoint="false"/>
+<arcpath id="001" x="511" y="386" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="T11 to P1" source="T11" target="P1">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="711" y="627" curvePoint="false"/>
+<arcpath id="001" x="516" y="383" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="T16 to P1" source="T16" target="P1">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="286" y="522" curvePoint="false"/>
+<arcpath id="001" x="494" y="380" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="T6 to P1" source="T6" target="P1">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="286" y="402" curvePoint="false"/>
+<arcpath id="001" x="492" y="374" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="T8 to P1" source="T8" target="P1">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="346" y="552" curvePoint="false"/>
+<arcpath id="001" x="497" y="383" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="T9 to P1" source="T9" target="P1">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="417" y="567" curvePoint="false"/>
+<arcpath id="001" x="500" y="385" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+</net>
+</pnml>

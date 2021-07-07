@@ -1,0 +1,2270 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<pnml>
+<net id="Net-One" type="PrT net">
+<tokenclass id="Default" enabled="true" red="0" green="0" blue="0"/>
+<labels x="557" y="787" width="128" height="24" border="true">
+<text>GLOBAL day(d)</text>
+</labels>
+<labels x="718" y="775" width="98" height="45" border="true">
+<text>GLOBAL role(r)
+</text>
+</labels>
+<labels x="1949" y="439" width="608" height="196" border="true">
+<text>How to handle contexts? For example over
+24	Moderator	Over	Meeting	MaintenanceDay	Prohibition
+25	Moderator	Over	Meeting	WorkingDay	Permission
+Should we keep context through whole flow or just use global?
+I can handle in code, or how can we generate?
+Some methods do not need context(default(=true) is used)
+only use three
+
+setModerator has to be run?
+simulate doesn't see difference in transitions with same name?
+
+r = x or r = y     (not)belongsTo(r, x, y)</text>
+</labels>
+<labels x="53" y="772" width="436" height="55" border="true">
+<text>INIT readyToCreateMeeting, meetingAttributes(T1, A1, M1), role(ADMIN), role(MODERATOR), role(ATTENDEE), role(NONATTENDEE), role(OWNER), role(PERSONNEL), role(WEBMASTER), day(MD)</text>
+</labels>
+<labels x="52" y="850" width="437" height="55" border="true">
+<text>INIT readyToCreateMeeting, meetingAttributes(T1, A1, M1), role(ADMIN), role(MODERATOR), role(ATTENDEE), role(NONATTENDEE), role(OWNER), role(PERSONNEL), role(WEBMASTER), day(WD)</text>
+</labels>
+<labels x="2056" y="92" width="376" height="290" border="true">
+<text>NOTES:
+createMeeting, openMeeting: in class MeetingSerice
+setMeetingTitle, setMeetingAgenda, setMeetingModerator: putMeetingTitle, putMeetingAgenda,putMeetingModerator in class Meeting Service
+
+askToSpeak: askToSpeak in class ChatService
+speak: speakInMeeting in class ChatService
+stopSpeaker: method over in class ChatService
+
+handOver (done by moderator): in class ChatService
+over: in class ChatService
+
+leave: it is "disconnectUserFromMeeting" in the implementation. It is always prohibited, even though there are permission rules. We will not test "leave".
+</text>
+</labels>
+<labels x="23" y="30" width="121" height="37" border="true">
+<text>VMS Workflow</text>
+</labels>
+<place id="P1">
+<graphics>
+<position x="600.0" y="225.0"/>
+</graphics>
+<name>
+<value>inactiveMeeting</value>
+<graphics>
+<offset x="71.0" y="-11.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P2">
+<graphics>
+<position x="1065.0" y="270.0"/>
+</graphics>
+<name>
+<value>meetingInSession</value>
+<graphics>
+<offset x="49.0" y="45.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P3">
+<graphics>
+<position x="1380.0" y="990.0"/>
+</graphics>
+<name>
+<value>closedMeeting</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P4">
+<graphics>
+<position x="390.0" y="45.0"/>
+</graphics>
+<name>
+<value>readyToCreateMeeting</value>
+<graphics>
+<offset x="73.0" y="-10.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P5">
+<graphics>
+<position x="510.0" y="690.0"/>
+</graphics>
+<name>
+<value>meetingAttributes</value>
+<graphics>
+<offset x="149.0" y="16.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P6">
+<graphics>
+<position x="1740.0" y="270.0"/>
+</graphics>
+<name>
+<value>allowToSpeak</value>
+<graphics>
+<offset x="96.0" y="-16.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P7">
+<graphics>
+<position x="1470.0" y="180.0"/>
+</graphics>
+<name>
+<value>waitingToSpeak</value>
+<graphics>
+<offset x="86.0" y="40.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P8">
+<graphics>
+<position x="1470.0" y="360.0"/>
+</graphics>
+<name>
+<value>speaking</value>
+<graphics>
+<offset x="43.0" y="-19.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<transition id="T1">
+<graphics>
+<position x="705.0" y="45.0"/>
+</graphics>
+<name>
+<value>openMeeting</value>
+<graphics>
+<offset x="403.0" y="31.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, d=WD, r!=ADMIN, r!=ATTENDEE, r!=NONATTENDEE, r!=PERSONNEL, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T10">
+<graphics>
+<position x="1455.0" y="840.0"/>
+</graphics>
+<name>
+<value>closeMeeting</value>
+<graphics>
+<offset x="478.66666666666697" y="29.25000000000005"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=ADMIN, r!=ATTENDEE, r!=NONATTENDEE, r!=PERSONNEL, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T12">
+<graphics>
+<position x="1620.0" y="180.0"/>
+</graphics>
+<name>
+<value>handOver</value>
+<graphics>
+<offset x="79.0" y="31.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r=MODERATOR, d=WD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T13">
+<graphics>
+<position x="1305.0" y="360.0"/>
+</graphics>
+<name>
+<value>over</value>
+<graphics>
+<offset x="106.0" y="36.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T14">
+<graphics>
+<position x="1590.0" y="345.0"/>
+</graphics>
+<name>
+<value>speak</value>
+<graphics>
+<offset x="322.0" y="-21.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=ADMIN, r!=NONATTENDEE, r!=PERSONNEL, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T15">
+<graphics>
+<position x="135.0" y="150.0"/>
+</graphics>
+<name>
+<value>pSetMeetingTitle(d, r, t1)</value>
+<graphics>
+<offset x="224.5" y="47.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r!=ATTENDEE, r!=NONATTENDEE, r!=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T17">
+<graphics>
+<position x="225.0" y="315.0"/>
+</graphics>
+<name>
+<value>pSetMeetingModerator(d,r,m1)</value>
+<graphics>
+<offset x="392.5" y="2.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=MODERATOR,r!=ATTENDEE, r!=NONATTENDEE, r!=OWNER, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T18">
+<graphics>
+<position x="1230.0" y="135.0"/>
+</graphics>
+<name>
+<value>pAskToSpeak</value>
+<graphics>
+<offset x="178.0" y="29.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r!=ATTENDEE, r!=MODERATOR, r!=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T19">
+<graphics>
+<position x="1560.0" y="30.0"/>
+</graphics>
+<name>
+<value>pHandOver</value>
+<graphics>
+<offset x="73.0" y="33.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r=MODERATOR, d=MD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T2">
+<graphics>
+<position x="495.0" y="105.0"/>
+</graphics>
+<name>
+<value>createMeeting</value>
+<graphics>
+<offset x="68.0" y="-9.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T20">
+<graphics>
+<position x="1590.0" y="390.0"/>
+</graphics>
+<name>
+<value>pSpeak</value>
+<graphics>
+<offset x="219.0" y="36.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=ATTENDEE, r!=MODERATOR, r!=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T21">
+<graphics>
+<position x="1305.0" y="315.0"/>
+</graphics>
+<name>
+<value>pOver</value>
+<graphics>
+<offset x="87.0" y="30.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T22">
+<graphics>
+<position x="1620.0" y="90.0"/>
+</graphics>
+<name>
+<value>uHandOver</value>
+<graphics>
+<offset x="29.0" y="29.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T23">
+<graphics>
+<position x="1305.0" y="420.0"/>
+</graphics>
+<name>
+<value>uOver</value>
+<graphics>
+<offset x="57.0" y="33.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T24">
+<graphics>
+<position x="150.0" y="225.0"/>
+</graphics>
+<name>
+<value>uSetMeetingTitle(d,r,t1)</value>
+<graphics>
+<offset x="167.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=PERSONNEL, r!=OWNER, r!=ADMIN, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T25">
+<graphics>
+<position x="120.0" y="75.0"/>
+</graphics>
+<name>
+<value>pSetMeetingTitle(d,r,t1)</value>
+<graphics>
+<offset x="292.25" y="42.75"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=MODERATOR,r!=ATTENDEE, r!=NONATTENDEE, r!=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T26">
+<graphics>
+<position x="165.0" y="285.0"/>
+</graphics>
+<name>
+<value>setMeetingTitle(d,r,t1)</value>
+<graphics>
+<offset x="16.25" y="36.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T27">
+<graphics>
+<position x="255.0" y="375.0"/>
+</graphics>
+<name>
+<value>pSetMeetingModerator(d,r,m1)</value>
+<graphics>
+<offset x="330.0" y="-14.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=ATTENDEE, r!=NONATTENDEE, r!=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T28">
+<graphics>
+<position x="270.0" y="420.0"/>
+</graphics>
+<name>
+<value>uSetMeetingModerator(d,r,m1)</value>
+<graphics>
+<offset x="313.5" y="-10.75"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=PERSONNEL, r!=OWNER, r!=ADMIN, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T29">
+<graphics>
+<position x="300.0" y="450.0"/>
+</graphics>
+<name>
+<value>setMeetingModerator(d,r,m1)</value>
+<graphics>
+<offset x="198.75" y="1.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T3">
+<graphics>
+<position x="810.0" y="660.0"/>
+</graphics>
+<name>
+<value>closeMeeting</value>
+<graphics>
+<offset x="462.6666666666671" y="33.666666666666664"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=ADMIN, r!=ATTENDEE, r!=NONATTENDEE, r!=PERSONNEL, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T30">
+<graphics>
+<position x="690.0" y="345.0"/>
+</graphics>
+<name>
+<value>pSetMeetingAgenda(d,r,a1)</value>
+<graphics>
+<offset x="281.0" y="52.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r!=ATTENDEE, r!=NONATTENDEE, r!=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T31">
+<graphics>
+<position x="645.0" y="420.0"/>
+</graphics>
+<name>
+<value>uSetMeetingAgenda(d,r,a1)</value>
+<graphics>
+<offset x="282.0" y="54.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=PERSONNEL, r!=OWNER, r!=ADMIN, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T32">
+<graphics>
+<position x="585.0" y="495.0"/>
+</graphics>
+<name>
+<value>setMeetingAgenda(d,r,a1)</value>
+<graphics>
+<offset x="39.0" y="40.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T33">
+<graphics>
+<position x="765.0" y="105.0"/>
+</graphics>
+<name>
+<value>pOpenMeeting</value>
+<graphics>
+<offset x="353.0" y="25.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r!=ADMIN, r!=ATTENDEE, r!=NONATTENDEE, r!=PERSONNEL, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T34">
+<graphics>
+<position x="810.0" y="195.0"/>
+</graphics>
+<name>
+<value>uOpenMeeting</value>
+<graphics>
+<offset x="33.0" y="-13.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=OWNER, r!=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T35">
+<graphics>
+<position x="1395.0" y="690.0"/>
+</graphics>
+<name>
+<value>uCloseMeeting</value>
+<graphics>
+<offset x="74.0" y="32.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=OWNER, r!=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T36">
+<graphics>
+<position x="915.0" y="810.0"/>
+</graphics>
+<name>
+<value>pCloseMeeting</value>
+<graphics>
+<offset x="398.66666666666646" y="35.33333333333335"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r!=ADMIN, r!=ATTENDEE, r!=NONATTENDEE, r!=PERSONNEL, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T37">
+<graphics>
+<position x="1650.0" y="750.0"/>
+</graphics>
+<name>
+<value>uCloseMeeting</value>
+<graphics>
+<offset x="124.66666666666664" y="-26.666666666666657"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>r!=OWNER, r!=MODERATOR</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T38">
+<graphics>
+<position x="1575.0" y="765.0"/>
+</graphics>
+<name>
+<value>pCloseMeeting</value>
+<graphics>
+<offset x="408.33333333333337" y="24.99999999999999"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r!=ADMIN, r!=ATTENDEE, r!=NONATTENDEE, r!=PERSONNEL, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T39">
+<graphics>
+<position x="1215.0" y="60.0"/>
+</graphics>
+<name>
+<value>pAskToSpeak</value>
+<graphics>
+<offset x="185.0" y="30.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=MODERATOR, r!=ATTENDEE, r!=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T40">
+<graphics>
+<position x="1215.0" y="0.0"/>
+</graphics>
+<name>
+<value>uAskToSpeak</value>
+<graphics>
+<offset x="281.0" y="27.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r!=ADMIN, r!=NONATTENDEE, r!=PERSONNEL, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T41">
+<graphics>
+<position x="1590.0" y="450.0"/>
+</graphics>
+<name>
+<value>pSpeak</value>
+<graphics>
+<offset x="319.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r!=ATTENDEE, r!=MODERATOR, r!=NONATTENDEE, r!=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T42">
+<graphics>
+<position x="1590.0" y="510.0"/>
+</graphics>
+<name>
+<value>uSpeak</value>
+<graphics>
+<offset x="232.0" y="37.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=MD, r!=WEBMASTER, r!=PERSONNEL, r!=ADMIN</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T5">
+<graphics>
+<position x="750.0" y="315.0"/>
+</graphics>
+<name>
+<value>pSetMeetingAgenda(d,r,a1)</value>
+<graphics>
+<offset x="279.0" y="-26.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=MODERATOR,r!=ATTENDEE, r!=NONATTENDEE, r!=OWNER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T7">
+<graphics>
+<position x="1230.0" y="210.0"/>
+</graphics>
+<name>
+<value>askToSpeak</value>
+<graphics>
+<offset x="303.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value>d=WD, r!=ADMIN, r!=NONATTENDEE, r!=PERSONNEL, r!=WEBMASTER</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<subnet>
+<value/>
+</subnet>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<arc id="P1 to T1" source="P1" target="T1">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="617" y="222" curvePoint="false"/>
+<arcpath id="001" x="710" y="56" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T15" source="P1" target="T15">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="596" y="233" curvePoint="false"/>
+<arcpath id="001" x="150" y="161" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T17" source="P1" target="T17">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="596" y="238" curvePoint="false"/>
+<arcpath id="001" x="240" y="326" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T24" source="P1" target="T24">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="596" y="236" curvePoint="false"/>
+<arcpath id="001" x="165" y="236" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T25" source="P1" target="T25">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="596" y="231" curvePoint="false"/>
+<arcpath id="001" x="135" y="86" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T26" source="P1" target="T26">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="596" y="237" curvePoint="false"/>
+<arcpath id="001" x="181" y="291" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T27" source="P1" target="T27">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="597" y="241" curvePoint="false"/>
+<arcpath id="001" x="270" y="386" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T28" source="P1" target="T28">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="597" y="243" curvePoint="false"/>
+<arcpath id="001" x="285" y="431" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T29" source="P1" target="T29">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="598" y="245" curvePoint="false"/>
+<arcpath id="001" x="315" y="461" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T30" source="P1" target="T30">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="618" y="247" curvePoint="false"/>
+<arcpath id="001" x="695" y="356" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T31" source="P1" target="T31">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="613" y="250" curvePoint="false"/>
+<arcpath id="001" x="656" y="416" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T32" source="P1" target="T32">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="610" y="250" curvePoint="false"/>
+<arcpath id="001" x="596" y="491" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T33" source="P1" target="T33">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="622" y="226" curvePoint="false"/>
+<arcpath id="001" x="770" y="116" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T34" source="P1" target="T34">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="625" y="233" curvePoint="false"/>
+<arcpath id="001" x="815" y="206" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P1 to T5" source="P1" target="T5">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="623" y="243" curvePoint="false"/>
+<arcpath id="001" x="755" y="326" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P2 to T18" source="P2" target="T18">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1087" y="271" curvePoint="false"/>
+<arcpath id="001" x="1235" y="146" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P2 to T3" source="P2" target="T3">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1067" y="293" curvePoint="false"/>
+<arcpath id="001" x="826" y="666" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P2 to T35" source="P2" target="T35">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1085" y="292" curvePoint="false"/>
+<arcpath id="001" x="1308" y="568" curvePoint="true"/>
+<arcpath id="002" x="1400" y="701" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P2 to T36" source="P2" target="T36">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1076" y="295" curvePoint="false"/>
+<arcpath id="001" x="1073" y="753" curvePoint="true"/>
+<arcpath id="002" x="931" y="816" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P2 to T39" source="P2" target="T39">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1083" y="268" curvePoint="false"/>
+<arcpath id="001" x="1220" y="71" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P2 to T40" source="P2" target="T40">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1083" y="267" curvePoint="false"/>
+<arcpath id="001" x="1226" y="26" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P2 to T7" source="P2" target="T7">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1090" y="275" curvePoint="false"/>
+<arcpath id="001" x="1235" y="221" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P4 to T2" source="P4" target="T2">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="413" y="63" curvePoint="false"/>
+<arcpath id="001" x="500" y="116" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T15" source="P5" target="T15">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="506" y="696" curvePoint="false"/>
+<arcpath id="001" x="273" y="533" curvePoint="true"/>
+<arcpath id="002" x="146" y="176" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T17" source="P5" target="T17">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="508" y="691" curvePoint="false"/>
+<arcpath id="001" x="273" y="473" curvePoint="true"/>
+<arcpath id="002" x="236" y="341" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T24" source="P5" target="T24">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="507" y="692" curvePoint="false"/>
+<arcpath id="001" x="268" y="493" curvePoint="true"/>
+<arcpath id="002" x="161" y="251" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T25" source="P5" target="T25">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="506" y="696" curvePoint="false"/>
+<arcpath id="001" x="238" y="508" curvePoint="true"/>
+<arcpath id="002" x="131" y="101" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T26" source="P5" target="T26">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="508" y="691" curvePoint="false"/>
+<arcpath id="001" x="298" y="508" curvePoint="true"/>
+<arcpath id="002" x="180" y="301" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T27" source="P5" target="T27">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="507" y="693" curvePoint="false"/>
+<arcpath id="001" x="253" y="523" curvePoint="true"/>
+<arcpath id="002" x="266" y="401" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T28" source="P5" target="T28">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="507" y="693" curvePoint="false"/>
+<arcpath id="001" x="298" y="553" curvePoint="true"/>
+<arcpath id="002" x="281" y="446" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T29" source="P5" target="T29">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="508" y="692" curvePoint="false"/>
+<arcpath id="001" x="328" y="553" curvePoint="true"/>
+<arcpath id="002" x="311" y="476" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T30" source="P5" target="T30">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="533" y="692" curvePoint="false"/>
+<arcpath id="001" x="748" y="508" curvePoint="true"/>
+<arcpath id="002" x="701" y="371" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T31" source="P5" target="T31">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="533" y="693" curvePoint="false"/>
+<arcpath id="001" x="673" y="583" curvePoint="true"/>
+<arcpath id="002" x="656" y="446" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T32" source="P5" target="T32">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="533" y="693" curvePoint="false"/>
+<arcpath id="001" x="643" y="613" curvePoint="true"/>
+<arcpath id="002" x="596" y="521" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P5 to T5" source="P5" target="T5">
+<graphics/>
+<inscription>
+<value>Default,&lt;t1,a1,m1&gt;</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="532" y="691" curvePoint="false"/>
+<arcpath id="001" x="823" y="433" curvePoint="true"/>
+<arcpath id="002" x="765" y="326" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P6 to T14" source="P6" target="T14">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1737" y="287" curvePoint="false"/>
+<arcpath id="001" x="1605" y="356" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P6 to T20" source="P6" target="T20">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1738" y="290" curvePoint="false"/>
+<arcpath id="001" x="1605" y="401" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P6 to T41" source="P6" target="T41">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1741" y="292" curvePoint="false"/>
+<arcpath id="001" x="1605" y="461" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P6 to T42" source="P6" target="T42">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1742" y="293" curvePoint="false"/>
+<arcpath id="001" x="1605" y="521" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P7 to T12" source="P7" target="T12">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1495" y="191" curvePoint="false"/>
+<arcpath id="001" x="1625" y="191" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P7 to T19" source="P7" target="T19">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1487" y="177" curvePoint="false"/>
+<arcpath id="001" x="1565" y="41" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P7 to T22" source="P7" target="T22">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1493" y="182" curvePoint="false"/>
+<arcpath id="001" x="1625" y="101" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P8 to T10" source="P8" target="T10">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1472" y="382" curvePoint="false"/>
+<arcpath id="001" x="1438" y="523" curvePoint="true"/>
+<arcpath id="002" x="1466" y="836" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P8 to T13" source="P8" target="T13">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1466" y="371" curvePoint="false"/>
+<arcpath id="001" x="1320" y="371" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P8 to T21" source="P8" target="T21">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1466" y="366" curvePoint="false"/>
+<arcpath id="001" x="1320" y="326" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P8 to T23" source="P8" target="T23">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1466" y="376" curvePoint="false"/>
+<arcpath id="001" x="1320" y="431" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P8 to T37" source="P8" target="T37">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1487" y="383" curvePoint="false"/>
+<arcpath id="001" x="1538" y="488" curvePoint="true"/>
+<arcpath id="002" x="1661" y="746" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="P8 to T38" source="P8" target="T38">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1478" y="385" curvePoint="false"/>
+<arcpath id="001" x="1493" y="538" curvePoint="true"/>
+<arcpath id="002" x="1586" y="761" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="T10 to P3" source="T10" target="P3">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1466" y="866" curvePoint="false"/>
+<arcpath id="001" x="1397" y="987" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T12 to P6" source="T12" target="P6">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1635" y="191" curvePoint="false"/>
+<arcpath id="001" x="1738" y="271" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T13 to P2" source="T13" target="P2">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1310" y="371" curvePoint="false"/>
+<arcpath id="001" x="1090" y="286" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T14 to P8" source="T14" target="P8">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1595" y="356" curvePoint="false"/>
+<arcpath id="001" x="1495" y="368" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T1 to P2" source="T1" target="P2">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="720" y="56" curvePoint="false"/>
+<arcpath id="001" x="1062" y="272" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T2 to P1" source="T2" target="P1">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="510" y="116" curvePoint="false"/>
+<arcpath id="001" x="601" y="223" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T35 to P3" source="T35" target="P3">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1406" y="716" curvePoint="false"/>
+<arcpath id="001" x="1391" y="986" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T36 to P3" source="T36" target="P3">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="930" y="826" curvePoint="false"/>
+<arcpath id="001" x="1376" y="995" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T37 to P3" source="T37" target="P3">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1661" y="776" curvePoint="false"/>
+<arcpath id="001" x="1578" y="928" curvePoint="true"/>
+<arcpath id="002" x="1405" y="997" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="T38 to P3" source="T38" target="P3">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1586" y="791" curvePoint="false"/>
+<arcpath id="001" x="1553" y="878" curvePoint="true"/>
+<arcpath id="002" x="1402" y="992" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="T3 to P3" source="T3" target="P3">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="825" y="676" curvePoint="false"/>
+<arcpath id="001" x="1377" y="993" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T7 to P7" source="T7" target="P7">
+<graphics/>
+<inscription>
+<value>Default,</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="1245" y="221" curvePoint="false"/>
+<arcpath id="001" x="1466" y="192" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+</net>
+</pnml>

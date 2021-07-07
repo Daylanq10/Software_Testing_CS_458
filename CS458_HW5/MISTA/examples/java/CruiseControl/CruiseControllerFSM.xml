@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><gxml>
+<graph id="Graph-One" type="General Graph">
+<labels x="126" y="37" width="111" height="27" border="true">
+<text>INIT INACTIVE</text>
+</labels>
+<node id="S1">
+<graphics>
+<position x="151.0" y="91.0"/>
+</graphics>
+<name>
+<value>INACTIVE</value>
+<graphics>
+<offset x="1.0" y="8.0"/>
+</graphics>
+</name>
+</node>
+<node id="S2">
+<graphics>
+<position x="151.0" y="211.0"/>
+</graphics>
+<name>
+<value>ACTIVE</value>
+<graphics>
+<offset x="62.0" y="-23.0"/>
+</graphics>
+</name>
+</node>
+<node id="S3">
+<graphics>
+<position x="151.0" y="316.0"/>
+</graphics>
+<name>
+<value>CRUISING</value>
+<graphics>
+<offset x="80.0" y="-8.0"/>
+</graphics>
+</name>
+</node>
+<node id="S4">
+<graphics>
+<position x="151.0" y="421.0"/>
+</graphics>
+<name>
+<value>STANDBY</value>
+<graphics>
+<offset x="41.0" y="52.0"/>
+</graphics>
+</name>
+</node>
+<arc id="" source="S2" target="S1">
+<event>
+<value>engineOff</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="176" y="217" curvePoint="false"/>
+<arcpath id="001" x="229" y="184" curvePoint="true"/>
+<arcpath id="002" x="214" y="139" curvePoint="true"/>
+<arcpath id="003" x="175" y="111" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S1" target="S2">
+<event>
+<value>engineOn</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="163" y="118" curvePoint="false"/>
+<arcpath id="001" x="163" y="208" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S2" target="S2">
+<event>
+<value>brake</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="148" y="218" curvePoint="false"/>
+<arcpath id="001" x="124" y="214" curvePoint="true"/>
+<arcpath id="002" x="94" y="229" curvePoint="true"/>
+<arcpath id="003" x="109" y="259" curvePoint="true"/>
+<arcpath id="004" x="139" y="244" curvePoint="true"/>
+<arcpath id="005" x="154" y="229" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S2" target="S2">
+<event>
+<value>accelerator</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="177" y="222" curvePoint="false"/>
+<arcpath id="001" x="244" y="229" curvePoint="true"/>
+<arcpath id="002" x="233" y="268" curvePoint="true"/>
+<arcpath id="003" x="199" y="259" curvePoint="true"/>
+<arcpath id="004" x="184" y="229" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S3" target="S1">
+<event>
+<value>engineOff</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="148" y="326" curvePoint="false"/>
+<arcpath id="001" x="94" y="304" curvePoint="true"/>
+<arcpath id="002" x="64" y="229" curvePoint="true"/>
+<arcpath id="003" x="73" y="171" curvePoint="true"/>
+<arcpath id="004" x="109" y="124" curvePoint="true"/>
+<arcpath id="005" x="149" y="108" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S4" target="S1">
+<event>
+<value>engineOff</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="177" y="435" curvePoint="false"/>
+<arcpath id="001" x="274" y="424" curvePoint="true"/>
+<arcpath id="002" x="304" y="304" curvePoint="true"/>
+<arcpath id="003" x="289" y="184" curvePoint="true"/>
+<arcpath id="004" x="244" y="124" curvePoint="true"/>
+<arcpath id="005" x="177" y="105" curvePoint="true"/>
+<type value=""/>
+</arc>
+<arc id="" source="S4" target="S3">
+<event>
+<value>resume</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="175" y="424" curvePoint="false"/>
+<arcpath id="001" x="214" y="394" curvePoint="true"/>
+<arcpath id="002" x="214" y="364" curvePoint="true"/>
+<arcpath id="003" x="175" y="335" curvePoint="true"/>
+<type value=""/>
+</arc>
+<arc id="" source="S4" target="S3">
+<event>
+<value>on</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="178" y="432" curvePoint="false"/>
+<arcpath id="001" x="229" y="424" curvePoint="true"/>
+<arcpath id="002" x="259" y="379" curvePoint="true"/>
+<arcpath id="003" x="229" y="334" curvePoint="true"/>
+<arcpath id="004" x="177" y="327" curvePoint="true"/>
+<type value=""/>
+</arc>
+<arc id="" source="S3" target="S4">
+<event>
+<value>off</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="166" y="342" curvePoint="false"/>
+<arcpath id="001" x="169" y="379" curvePoint="true"/>
+<arcpath id="002" x="164" y="418" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S3" target="S4">
+<event>
+<value>accelerator</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="150" y="335" curvePoint="false"/>
+<arcpath id="001" x="124" y="364" curvePoint="true"/>
+<arcpath id="002" x="139" y="409" curvePoint="true"/>
+<arcpath id="003" x="152" y="422" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S3" target="S4">
+<event>
+<value>brake</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="148" y="330" curvePoint="false"/>
+<arcpath id="001" x="94" y="349" curvePoint="true"/>
+<arcpath id="002" x="79" y="394" curvePoint="true"/>
+<arcpath id="003" x="124" y="439" curvePoint="true"/>
+<arcpath id="004" x="149" y="440" curvePoint="true"/>
+<type value=""/>
+</arc>
+<arc id="" source="S2" target="S3">
+<event>
+<value>on</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="163" y="238" curvePoint="false"/>
+<arcpath id="001" x="163" y="313" curvePoint="false"/>
+<type value=""/>
+</arc>
+</graph>
+</gxml>

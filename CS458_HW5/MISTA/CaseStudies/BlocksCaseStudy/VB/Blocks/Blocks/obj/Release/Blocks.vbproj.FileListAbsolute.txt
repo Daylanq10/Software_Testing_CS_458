@@ -1,0 +1,12 @@
+C:\Documents and Settings\DSU\Local Settings\Application Data\Temporary Projects\Blocks\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\DSU\Local Settings\Application Data\Temporary Projects\Blocks\obj\Release\Blocks.Resources.resources
+C:\Documents and Settings\DSU\Local Settings\Application Data\Temporary Projects\Blocks\obj\Release\Blocks.vbproj.GenerateResource.Cache
+C:\TestVB\Blocks\Blocks\bin\Release\Blocks.exe
+C:\TestVB\Blocks\Blocks\bin\Release\Blocks.pdb
+C:\TestVB\Blocks\Blocks\bin\Release\Blocks.xml
+C:\TestVB\Blocks\Blocks\obj\Release\ResolveAssemblyReference.cache
+C:\TestVB\Blocks\Blocks\obj\Release\Blocks.Resources.resources
+C:\TestVB\Blocks\Blocks\obj\Release\Blocks.vbproj.GenerateResource.Cache
+C:\TestVB\Blocks\Blocks\obj\Release\Blocks.exe
+C:\TestVB\Blocks\Blocks\obj\Release\Blocks.xml
+C:\TestVB\Blocks\Blocks\obj\Release\Blocks.pdb

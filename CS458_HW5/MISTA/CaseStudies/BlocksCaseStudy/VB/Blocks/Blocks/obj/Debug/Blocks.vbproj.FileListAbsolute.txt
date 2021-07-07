@@ -1,0 +1,12 @@
+C:\TestVB\Blocks\Blocks\bin\Debug\Blocks.exe
+C:\TestVB\Blocks\Blocks\bin\Debug\Blocks.pdb
+C:\TestVB\Blocks\Blocks\bin\Debug\Blocks.xml
+C:\TestVB\Blocks\Blocks\obj\Debug\ResolveAssemblyReference.cache
+C:\TestVB\Blocks\Blocks\obj\Debug\Blocks.Resources.resources
+C:\TestVB\Blocks\Blocks\obj\Debug\Blocks.vbproj.GenerateResource.Cache
+C:\TestVB\Blocks\Blocks\obj\Debug\Blocks.exe
+C:\TestVB\Blocks\Blocks\obj\Debug\Blocks.xml
+C:\TestVB\Blocks\Blocks\obj\Debug\Blocks.pdb
+G:\work\TestVB\Blocks\Blocks\obj\Debug\Blocks.exe
+G:\work\TestVB\Blocks\Blocks\obj\Debug\Blocks.xml
+G:\work\TestVB\Blocks\Blocks\obj\Debug\Blocks.pdb

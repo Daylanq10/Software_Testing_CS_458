@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><gxml>
+<graph id="Graph-One" type="General Graph">
+<labels x="26" y="21" width="201" height="14" border="true">
+<text>BankAccount State Model</text>
+</labels>
+<labels x="21" y="456" width="101" height="14" border="true">
+<text>GOAL CLOSED</text>
+</labels>
+<labels x="27" y="56" width="110" height="14" border="true">
+<text>INIT OPEN</text>
+</labels>
+<node id="S1">
+<graphics>
+<position x="213.0" y="153.0"/>
+</graphics>
+<name>
+<value>OPEN</value>
+<graphics>
+<offset x="-2.0" y="-7.0"/>
+</graphics>
+</name>
+</node>
+<node id="S2">
+<graphics>
+<position x="393.0" y="153.0"/>
+</graphics>
+<name>
+<value>CLOSED</value>
+<graphics>
+<offset x="42.0" y="-16.0"/>
+</graphics>
+</name>
+</node>
+<node id="S3">
+<graphics>
+<position x="408.0" y="303.0"/>
+</graphics>
+<name>
+<value>OVERDRAWN</value>
+<graphics>
+<offset x="-12.0" y="26.0"/>
+</graphics>
+</name>
+</node>
+<arc id="" source="S1" target="S2">
+<event>
+<value>close</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="240" y="165" curvePoint="false"/>
+<arcpath id="001" x="390" y="165" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S3" target="S1">
+<event>
+<value>deposit</value>
+</event>
+<precondition>
+<value>amt&gt;0 &amp;&amp; amt+b&gt;=0</value>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="413" y="301" curvePoint="false"/>
+<arcpath id="001" x="307" y="184" curvePoint="true"/>
+<arcpath id="002" x="239" y="168" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S1" target="S3">
+<event>
+<value>withdraw</value>
+</event>
+<precondition>
+<value>amt&gt;0 &amp;&amp; b-amt&lt;0 &amp;&amp; b-amt&gt;-1000</value>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="227" y="179" curvePoint="false"/>
+<arcpath id="001" x="275" y="260" curvePoint="true"/>
+<arcpath id="002" x="405" y="309" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S1" target="S1">
+<event>
+<value>getBalance</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="235" y="154" curvePoint="false"/>
+<arcpath id="001" x="260" y="110" curvePoint="true"/>
+<arcpath id="002" x="215" y="110" curvePoint="true"/>
+<arcpath id="003" x="230" y="155" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S3" target="S3">
+<event>
+<value>getBalance</value>
+</event>
+<precondition>
+<value/>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="432" y="323" curvePoint="false"/>
+<arcpath id="001" x="485" y="350" curvePoint="true"/>
+<arcpath id="002" x="485" y="320" curvePoint="true"/>
+<arcpath id="003" x="440" y="320" curvePoint="true"/>
+<type value=""/>
+</arc>
+<arc id="" source="S1" target="S1">
+<event>
+<value>deposit</value>
+</event>
+<precondition>
+<value>amt&gt;0</value>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="210" y="160" curvePoint="false"/>
+<arcpath id="001" x="167" y="153" curvePoint="true"/>
+<arcpath id="002" x="125" y="170" curvePoint="true"/>
+<arcpath id="003" x="170" y="185" curvePoint="true"/>
+<arcpath id="004" x="215" y="170" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S3" target="S3">
+<event>
+<value>deposit</value>
+</event>
+<precondition>
+<value>amt&gt;0 &amp;&amp; amt+b&lt;0</value>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="409" y="325" curvePoint="false"/>
+<arcpath id="001" x="365" y="380" curvePoint="true"/>
+<arcpath id="002" x="395" y="380" curvePoint="true"/>
+<arcpath id="003" x="410" y="335" curvePoint="false"/>
+<type value=""/>
+</arc>
+<arc id="" source="S1" target="S1">
+<event>
+<value>withdraw</value>
+</event>
+<precondition>
+<value>amt&gt;0 &amp;&amp; b-amt&gt;=0</value>
+</precondition>
+<postcondition>
+<value/>
+</postcondition>
+<graphics/>
+<arcpath id="000" x="213" y="175" curvePoint="false"/>
+<arcpath id="001" x="167" y="227" curvePoint="true"/>
+<arcpath id="002" x="212" y="212" curvePoint="true"/>
+<arcpath id="003" x="227" y="182" curvePoint="false"/>
+<type value=""/>
+</arc>
+</graph>
+</gxml>

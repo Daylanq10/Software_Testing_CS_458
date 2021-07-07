@@ -1,0 +1,4 @@
+
+sequence pickup [x/6], stack [x/6, y/3]
+
+sequence unstack[x/5, y/6], putdown[x/5], unstack[x/2, y/3], stack[x/2, y/6], pickup[x/5], stack[x/5, y/3]

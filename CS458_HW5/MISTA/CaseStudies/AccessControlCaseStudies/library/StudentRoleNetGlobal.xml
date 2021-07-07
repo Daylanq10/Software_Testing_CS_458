@@ -1,0 +1,967 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<pnml>
+<net id="Net-One" type="PrT net">
+<tokenclass id="Default" enabled="true" red="0" green="0" blue="0"/>
+<labels x="33" y="42" width="246" height="29" border="false">
+<text>Access control policies for the student role</text>
+</labels>
+<labels x="733" y="253" width="92" height="22" border="true">
+<text>GLOBAL day(d)</text>
+</labels>
+<labels x="300" y="41" width="508" height="21" border="true">
+<text>INIT available(B1), day(WD), day(MD), day(HD), PersonalAccount(PA), BorrowerAccount(BA)</text>
+</labels>
+<place id="P2">
+<graphics>
+<position x="300.0" y="255.0"/>
+</graphics>
+<name>
+<value>available</value>
+<graphics>
+<offset x="-3.0" y="11.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P3">
+<graphics>
+<position x="615.0" y="210.0"/>
+</graphics>
+<name>
+<value>borrowed</value>
+<graphics>
+<offset x="41.0" y="48.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P4">
+<graphics>
+<position x="615.0" y="315.0"/>
+</graphics>
+<name>
+<value>reserved</value>
+<graphics>
+<offset x="49.0" y="-9.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P5">
+<graphics>
+<position x="75.0" y="105.0"/>
+</graphics>
+<name>
+<value>PersonalAccount</value>
+<graphics>
+<offset x="71.0" y="-2.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="P6">
+<graphics>
+<position x="75.0" y="420.0"/>
+</graphics>
+<name>
+<value>BorrowerAccount</value>
+<graphics>
+<offset x="69.0" y="-15.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<transition id="T1">
+<graphics>
+<position x="510.0" y="240.0"/>
+</graphics>
+<name>
+<value>BorrowBook(b,d)</value>
+<graphics>
+<offset x="64.0" y="-15.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=WD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T10">
+<graphics>
+<position x="510.0" y="150.0"/>
+</graphics>
+<name>
+<value>GiveBackBook(b,d)</value>
+<graphics>
+<offset x="81.0" y="-13.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=WD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T11">
+<graphics>
+<position x="615.0" y="150.0"/>
+</graphics>
+<name>
+<value>PGiveBackBook(b,d)</value>
+<graphics>
+<offset x="97.0" y="-12.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=HD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T12">
+<graphics>
+<position x="705.0" y="150.0"/>
+</graphics>
+<name>
+<value>UGiveBackBook(b,d)</value>
+<graphics>
+<offset x="126.0" y="-9.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=MD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T13">
+<graphics>
+<position x="705.0" y="375.0"/>
+</graphics>
+<name>
+<value>BorrowBook(b,d)</value>
+<graphics>
+<offset x="107.0" y="32.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=WD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T14">
+<graphics>
+<position x="615.0" y="375.0"/>
+</graphics>
+<name>
+<value>PBorrowBook(b,d)</value>
+<graphics>
+<offset x="88.0" y="29.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=HD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T15">
+<graphics>
+<position x="75.0" y="195.0"/>
+</graphics>
+<name>
+<value>UManageAccess</value>
+<graphics>
+<offset x="66.0" y="-18.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value/>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T16">
+<graphics>
+<position x="75.0" y="255.0"/>
+</graphics>
+<name>
+<value>UCreateAccount</value>
+<graphics>
+<offset x="60.0" y="-9.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value/>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T17">
+<graphics>
+<position x="75.0" y="315.0"/>
+</graphics>
+<name>
+<value>UModifyAccount</value>
+<graphics>
+<offset x="64.0" y="-6.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value/>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T18">
+<graphics>
+<position x="150.0" y="420.0"/>
+</graphics>
+<name>
+<value>UConsultBorrowerAccount</value>
+<graphics>
+<offset x="107.0" y="50.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value/>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T2">
+<graphics>
+<position x="300.0" y="375.0"/>
+</graphics>
+<name>
+<value>PReserveBook(b,d)</value>
+<graphics>
+<offset x="52.0" y="33.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=HD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T3">
+<graphics>
+<position x="405.0" y="375.0"/>
+</graphics>
+<name>
+<value>UReserveBook(b,d)</value>
+<graphics>
+<offset x="59.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=MD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T4">
+<graphics>
+<position x="510.0" y="315.0"/>
+</graphics>
+<name>
+<value>ReserveBook(b,d)</value>
+<graphics>
+<offset x="74.0" y="-17.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=WD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T5">
+<graphics>
+<position x="225.0" y="315.0"/>
+</graphics>
+<name>
+<value>UDeliverBook(b,d)</value>
+<graphics>
+<offset x="86.0" y="48.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value/>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T6">
+<graphics>
+<position x="225.0" y="195.0"/>
+</graphics>
+<name>
+<value>UFixBook(b,d)</value>
+<graphics>
+<offset x="71.0" y="-7.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<guard>
+<value/>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T7">
+<graphics>
+<position x="510.0" y="375.0"/>
+</graphics>
+<name>
+<value>UBorrowBook(b,d)</value>
+<graphics>
+<offset x="72.0" y="33.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=MD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T8">
+<graphics>
+<position x="300.0" y="150.0"/>
+</graphics>
+<name>
+<value>PBorrowBook(b,d)</value>
+<graphics>
+<offset x="44.0" y="-14.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=HD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T9">
+<graphics>
+<position x="405.0" y="150.0"/>
+</graphics>
+<name>
+<value>UBorrowBook(b,d)</value>
+<graphics>
+<offset x="67.0" y="-13.0"/>
+</graphics>
+</name>
+<orientation>
+<value>90</value>
+</orientation>
+<guard>
+<value>d=MD</value>
+</guard>
+<effect>
+<value/>
+</effect>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>true</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<arc id="P2 to T1" source="P2" target="T1">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="326" y="265" curvePoint="false"/>
+<arcpath id="001" x="506" y="252" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P2 to T2" source="P2" target="T2">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="311" y="281" curvePoint="false"/>
+<arcpath id="001" x="311" y="381" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P2 to T3" source="P2" target="T3">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="322" y="278" curvePoint="false"/>
+<arcpath id="001" x="416" y="381" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P2 to T4" source="P2" target="T4">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="326" y="271" curvePoint="false"/>
+<arcpath id="001" x="506" y="327" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P2 to T5" source="P2" target="T5">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="300" y="276" curvePoint="false"/>
+<arcpath id="001" x="241" y="327" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P2 to T6" source="P2" target="T6">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="300" y="257" curvePoint="false"/>
+<arcpath id="001" x="241" y="207" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P2 to T7" source="P2" target="T7">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="324" y="274" curvePoint="false"/>
+<arcpath id="001" x="506" y="387" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P2 to T8" source="P2" target="T8">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="311" y="252" curvePoint="false"/>
+<arcpath id="001" x="311" y="166" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P2 to T9" source="P2" target="T9">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="322" y="256" curvePoint="false"/>
+<arcpath id="001" x="416" y="166" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P3 to T10" source="P3" target="T10">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="614" y="213" curvePoint="false"/>
+<arcpath id="001" x="536" y="162" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P3 to T11" source="P3" target="T11">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="626" y="207" curvePoint="false"/>
+<arcpath id="001" x="626" y="166" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P3 to T12" source="P3" target="T12">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="641" y="220" curvePoint="false"/>
+<arcpath id="001" x="703" y="205" curvePoint="true"/>
+<arcpath id="002" x="716" y="166" curvePoint="true"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P4 to T13" source="P4" target="T13">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="639" y="335" curvePoint="false"/>
+<arcpath id="001" x="711" y="381" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="P4 to T14" source="P4" target="T14">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="626" y="341" curvePoint="false"/>
+<arcpath id="001" x="626" y="381" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P5 to T15" source="P5" target="T15">
+<graphics/>
+<inscription>
+<value>Default,pa</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="87" y="131" curvePoint="false"/>
+<arcpath id="001" x="87" y="192" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P6 to T17" source="P6" target="T17">
+<graphics/>
+<inscription>
+<value>Default,ba</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="87" y="417" curvePoint="false"/>
+<arcpath id="001" x="87" y="342" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="P6 to T18" source="P6" target="T18">
+<graphics/>
+<inscription>
+<value>Default,ba</value>
+<graphics/>
+</inscription>
+<tagged>
+<value/>
+</tagged>
+<arcpath id="000" x="101" y="432" curvePoint="false"/>
+<arcpath id="001" x="156" y="432" curvePoint="false"/>
+<type value="bidirectional"/>
+</arc>
+<arc id="T10 to P2" source="T10" target="P2">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="506" y="162" curvePoint="false"/>
+<arcpath id="001" x="325" y="259" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T13 to P3" source="T13" target="P3">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="721" y="382" curvePoint="false"/>
+<arcpath id="001" x="718" y="343" curvePoint="true"/>
+<arcpath id="002" x="688" y="283" curvePoint="true"/>
+<arcpath id="003" x="638" y="231" curvePoint="true"/>
+<type value="normal"/>
+</arc>
+<arc id="T1 to P3" source="T1" target="P3">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="536" y="252" curvePoint="false"/>
+<arcpath id="001" x="612" y="226" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T4 to P4" source="T4" target="P4">
+<graphics/>
+<inscription>
+<value>Default,b</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="536" y="327" curvePoint="false"/>
+<arcpath id="001" x="612" y="327" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+</net>
+</pnml>
